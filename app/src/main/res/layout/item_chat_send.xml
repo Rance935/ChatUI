@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/content_vertical_margin">
+
+    <TextView
+        android:id="@+id/chat_item_date"
+        style="@style/text_body"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/chat_item_header"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitCenter" />
+
+        <RelativeLayout
+            android:id="@+id/chat_item_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/chat_item_header">
+
+            <com.rance.chatui.widget.BubbleImageView
+                android:id="@+id/chat_item_content_image"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                android:visibility="gone"
+                app:angle="6dp"
+                app:arrowHeight="8dp"
+                app:arrowLocation="right"
+                app:arrowPosition="15dp"
+                app:arrowWidth="10dp" />
+
+            <com.rance.chatui.widget.BubbleLinearLayout
+                android:id="@+id/chat_item_layout_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:minHeight="48dp"
+                android:minWidth="120dp"
+                android:orientation="horizontal"
+                app:angle="4dp"
+                app:arrowHeight="10dp"
+                app:arrowLocation="right"
+                app:arrowPosition="10dp"
+                app:arrowWidth="8dp"
+                app:bubbleColor="@color/colorPrimary">
+
+                <TextView
+                    android:id="@+id/chat_item_content_text"
+                    style="@style/text_subhead_black"
+                    android:layout_marginRight="@dimen/content_horizontal_margin"
+                    android:padding="@dimen/content_vertical_margin"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/chat_item_voice"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:src="@mipmap/icon_voice_right3"
+                    android:scaleType="fitCenter"
+                    android:visibility="gone" />
+            </com.rance.chatui.widget.BubbleLinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/chat_item_voice_time"
+            style="@style/text_body"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/content_vertical_margin"
+            android:layout_toLeftOf="@+id/chat_item_layout" />
+
+        <ImageView
+            android:id="@+id/chat_item_fail"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/content_vertical_margin"
+            android:layout_toLeftOf="@+id/chat_item_voice_time"
+            android:src="@drawable/msg_state_fail_resend"
+            android:focusable="false"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/chat_item_progress"
+            style="@android:style/Widget.ProgressBar.Small.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/content_vertical_margin"
+            android:layout_toLeftOf="@+id/chat_item_voice_time"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,111 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="6dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="6dp">
+
+        <ImageView
+            android:id="@+id/emotion_voice"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginRight="@dimen/content_horizontal_margin"
+            android:clickable="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/icon_chat_voice" />
+
+        <EditText
+            android:id="@+id/edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/corners_edit_white"
+            android:maxLines="3"
+            android:minHeight="36dp"
+            android:paddingLeft="@dimen/content_horizontal_margin"
+            android:paddingRight="@dimen/content_horizontal_margin"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/voice_text"
+            style="@style/text_subhead_black"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/corners_edit"
+            android:gravity="center"
+            android:minHeight="36dp"
+            android:paddingLeft="@dimen/content_horizontal_margin"
+            android:paddingRight="@dimen/content_horizontal_margin"
+            android:text="按住说话"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/emotion_button"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="@dimen/content_horizontal_margin"
+            android:clickable="true"
+            android:src="@mipmap/icon_chat_expression" />
+
+        <ImageView
+            android:id="@+id/emotion_add"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="@dimen/content_horizontal_margin"
+            android:clickable="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/icon_chat_add" />
+
+        <com.rance.chatui.widget.StateButton
+            android:id="@+id/emotion_send"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="@dimen/content_horizontal_margin"
+            android:padding="1dp"
+            android:text="发送"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            app:normalBackgroundColor="@color/colorPrimary"
+            app:pressedBackgroundColor="@color/colorPrimaryDark"
+            app:radius="5dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_line" />
+
+    <RelativeLayout
+        android:id="@+id/emotion_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/bg_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <com.rance.chatui.widget.NoScrollViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+</LinearLayout>
