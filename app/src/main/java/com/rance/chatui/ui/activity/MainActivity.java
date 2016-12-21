@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         messageInfos.add(messageInfo);
 
         MessageInfo messageInfo1 = new MessageInfo();
-        messageInfo1.setFilepath("");
+        messageInfo1.setFilepath("http://www.trueme.net/bb_midi/welcome.wav");
         messageInfo1.setVoiceTime(3000);
         messageInfo1.setType(Constants.CHAT_ITEM_TYPE_RIGHT);
         messageInfo1.setSendState(Constants.CHAT_ITEM_SEND_SUCCESS);
