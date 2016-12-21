@@ -8,10 +8,9 @@ import com.rance.chatui.R;
 import com.rance.chatui.util.Constants;
 
 /**
- * @author : zejian
- * @time : 2016年1月5日 上午11:32:33
- * @email : shinezejian@163.com
- * @description :表情加载类,可自己添加多种表情，分别建立不同的map存放和不同的标志符即可
+ * 作者：Rance on 2016/11/29 10:47
+ * 邮箱：rance935@163.com
+ * 表情加载类,可自己添加多种表情，分别建立不同的map存放和不同的标志符即可
  */
 public class EmotionUtils {
 

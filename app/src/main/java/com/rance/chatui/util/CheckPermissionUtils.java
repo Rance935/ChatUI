@@ -1,11 +1,13 @@
 package com.rance.chatui.util;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 
 /**
  * 作者：Rance on 2016/12/14 11:09
@@ -22,27 +24,44 @@ public class CheckPermissionUtils {
     public static int audioFormat = AudioFormat.ENCODING_PCM_16BIT;
     // 缓冲区字节大小
     public static int bufferSizeInBytes = 0;
+
     /**
      * 判断是是否有录音权限
      */
-    public static boolean isHasPermission(final Context context){
+    public static boolean isHasPermission(final Context context) {
         bufferSizeInBytes = 0;
         bufferSizeInBytes = AudioRecord.getMinBufferSize(sampleRateInHz,
                 channelConfig, audioFormat);
-        AudioRecord audioRecord =  new AudioRecord(audioSource, sampleRateInHz,
+        AudioRecord audioRecord = new AudioRecord(audioSource, sampleRateInHz,
                 channelConfig, audioFormat, bufferSizeInBytes);
         //开始录制音频
-        try{
+        try {
             // 防止某些手机崩溃，例如联想
             audioRecord.startRecording();
-        }catch (IllegalStateException e){
+        } catch (IllegalStateException e) {
             e.printStackTrace();
         }
         /**
          * 根据开始录音判断是否有录音权限
          */
         if (audioRecord.getRecordingState() != AudioRecord.RECORDSTATE_RECORDING) {
-            context.startActivity(new Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS));
+            new AlertDialog.Builder(context)
+                    .setTitle("提示")
+                    .setMessage("检查录音权限未开启, 请尝试以下路径开启录音权限：三方手机管理（360、应用宝）-权限管理-应用程序-录音-允许。或直接去设置中心找到应用程序开启权限")
+                    .setNegativeButton("返回", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setPositiveButton("去设置", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            context.startActivity(new Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS));
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
             return false;
         }
         audioRecord.stop();

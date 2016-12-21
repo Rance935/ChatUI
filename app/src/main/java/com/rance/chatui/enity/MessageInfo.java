@@ -5,11 +5,9 @@ package com.rance.chatui.enity;
  * 邮箱：rance935@163.com
  */
 public class MessageInfo {
-    /** 1-接受消息  2-发送消息**/
     private int type;
     private String content;
     private String filepath;
-    /** 1-发送中  2-发送失败  3-发送成功**/
     private int sendState;
     private String time;
     private String header;

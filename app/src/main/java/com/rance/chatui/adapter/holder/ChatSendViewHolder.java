@@ -11,6 +11,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.rance.chatui.R;
 import com.rance.chatui.adapter.ChatAdapter;
 import com.rance.chatui.enity.MessageInfo;
+import com.rance.chatui.util.Constants;
 import com.rance.chatui.util.EmotionUtils;
 import com.rance.chatui.util.Utils;
 import com.rance.chatui.widget.BubbleImageView;
@@ -98,15 +99,15 @@ public class ChatSendViewHolder extends BaseViewHolder<MessageInfo> {
             });
         }
         switch (data.getSendState()) {
-            case 1:
+            case Constants.CHAT_ITEM_SENDING:
                 chatItemProgress.setVisibility(View.VISIBLE);
                 chatItemFail.setVisibility(View.GONE);
                 break;
-            case 2:
+            case Constants.CHAT_ITEM_SEND_ERROR:
                 chatItemProgress.setVisibility(View.GONE);
                 chatItemFail.setVisibility(View.VISIBLE);
                 break;
-            case 3:
+            case Constants.CHAT_ITEM_SEND_SUCCESS:
                 chatItemProgress.setVisibility(View.GONE);
                 chatItemFail.setVisibility(View.GONE);
                 break;

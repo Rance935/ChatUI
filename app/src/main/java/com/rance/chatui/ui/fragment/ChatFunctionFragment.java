@@ -137,8 +137,6 @@ public class ChatFunctionFragment extends BaseFragment {
                 if (res == Activity.RESULT_OK) {
                     try {
                         MessageInfo messageInfo = new MessageInfo();
-                        messageInfo.setSendState(1);
-                        messageInfo.setType(2);
                         messageInfo.setImageUrl(imageUri.getPath());
                         EventBus.getDefault().post(messageInfo);
                     } catch (Exception e) {
@@ -153,8 +151,6 @@ public class ChatFunctionFragment extends BaseFragment {
                     try {
                         Uri uri = data.getData();
                         MessageInfo messageInfo = new MessageInfo();
-                        messageInfo.setSendState(1);
-                        messageInfo.setType(2);
                         messageInfo.setImageUrl(uri.getPath());
                         EventBus.getDefault().post(messageInfo);
                     } catch (Exception e) {

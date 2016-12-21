@@ -32,6 +32,7 @@ import org.greenrobot.eventbus.EventBus;
 /**
  * 作者：Rance on 2016/12/13 15:19
  * 邮箱：rance935@163.com
+ * 输入框管理类
  */
 public class EmotionInputDetector {
 
@@ -187,11 +188,8 @@ public class EmotionInputDetector {
             public void onClick(View v) {
                 mAddButton.setVisibility(View.VISIBLE);
                 mSendButton.setVisibility(View.GONE);
-                hideSoftInput();
                 MessageInfo messageInfo = new MessageInfo();
                 messageInfo.setContent(mEditText.getText().toString());
-                messageInfo.setSendState(1);
-                messageInfo.setType(2);
                 EventBus.getDefault().post(messageInfo);
                 mEditText.setText("");
             }
@@ -239,7 +237,7 @@ public class EmotionInputDetector {
                         mAudioRecoderUtils.startRecord(mActivity);
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        if (wantToCancle(x, y)){
+                        if (wantToCancle(x, y)) {
                             mVoiceText.setText("松开结束");
                             mPopVoiceText.setText("松开手指，取消发送");
                             mVoiceText.setTag("2");
@@ -251,7 +249,7 @@ public class EmotionInputDetector {
                         break;
                     case MotionEvent.ACTION_UP:
                         mVoicePop.dismiss();
-                        if (mVoiceText.getTag().equals("2")){
+                        if (mVoiceText.getTag().equals("2")) {
                             //取消录音（删除录音文件）
                             mAudioRecoderUtils.cancelRecord();
                         } else {
@@ -276,7 +274,7 @@ public class EmotionInputDetector {
             return true;
         }
         // 超过按钮的高度
-        if (y < - 50 || y > mVoiceText.getHeight() + 50) {
+        if (y < -50 || y > mVoiceText.getHeight() + 50) {
             return true;
         }
         return false;
@@ -321,8 +319,6 @@ public class EmotionInputDetector {
                 mTextView.setText(Utils.long2String(0));
                 MessageInfo messageInfo = new MessageInfo();
                 messageInfo.setFilepath(filePath);
-                messageInfo.setSendState(1);
-                messageInfo.setType(2);
                 messageInfo.setVoiceTime(time);
                 EventBus.getDefault().post(messageInfo);
             }

@@ -9,6 +9,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.rance.chatui.adapter.holder.ChatAcceptViewHolder;
 import com.rance.chatui.adapter.holder.ChatSendViewHolder;
 import com.rance.chatui.enity.MessageInfo;
+import com.rance.chatui.util.Constants;
 
 /**
  * 作者：Rance on 2016/11/29 10:46
@@ -26,10 +27,10 @@ public class ChatAdapter extends RecyclerArrayAdapter<MessageInfo> {
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
         BaseViewHolder viewHolder = null;
         switch (viewType) {
-            case 1:
+            case Constants.CHAT_ITEM_TYPE_LEFT:
                 viewHolder = new ChatAcceptViewHolder(parent, onItemClickListener);
                 break;
-            case 2:
+            case Constants.CHAT_ITEM_TYPE_RIGHT:
                 viewHolder = new ChatSendViewHolder(parent, onItemClickListener);
                 break;
         }

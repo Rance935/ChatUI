@@ -9,10 +9,9 @@ import android.widget.EditText;
 import com.rance.chatui.adapter.EmotionGridViewAdapter;
 
 /**
- * Created by zejian
- * Time  16/1/8 下午5:05
- * Email shinezejian@163.com
- * Description:点击表情的全局监听管理类
+ * 作者：Rance on 2016/11/29 10:47
+ * 邮箱：rance935@163.com
+ * 点击表情的全局监听管理类
  */
 public class GlobalOnItemClickManagerUtils {
 

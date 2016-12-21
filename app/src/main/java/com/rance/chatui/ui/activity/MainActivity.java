@@ -1,6 +1,5 @@
 package com.rance.chatui.ui.activity;
 
-import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -12,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.rance.chatui.R;
@@ -20,6 +20,7 @@ import com.rance.chatui.adapter.CommonFragmentPagerAdapter;
 import com.rance.chatui.enity.MessageInfo;
 import com.rance.chatui.ui.fragment.ChatEmotionFragment;
 import com.rance.chatui.ui.fragment.ChatFunctionFragment;
+import com.rance.chatui.util.Constants;
 import com.rance.chatui.util.GlobalOnItemClickManagerUtils;
 import com.rance.chatui.util.MediaManager;
 import com.rance.chatui.widget.EmotionInputDetector;
@@ -36,6 +37,10 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+/**
+ * 作者：Rance on 2016/11/29 10:47
+ * 邮箱：rance935@163.com
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.chat_list)
@@ -121,14 +126,12 @@ public class MainActivity extends AppCompatActivity {
     private ChatAdapter.onItemClickListener itemClickListener = new ChatAdapter.onItemClickListener() {
         @Override
         public void onHeaderClick(int position) {
-
+            Toast.makeText(MainActivity.this, "onHeaderClick", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onImageClick(int position) {
-            EventBus.getDefault().postSticky(messageInfos.get(position).getImageUrl());
-//            startActivity(new Intent(ChatActivity.this, FullImageActivity.class));
-//            overridePendingTransition(R.anim.activity_zoom, R.anim.activity_expand);
+            Toast.makeText(MainActivity.this, "onImageClick", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -168,23 +171,30 @@ public class MainActivity extends AppCompatActivity {
 
         MessageInfo messageInfo = new MessageInfo();
         messageInfo.setContent("你好，欢迎使用Rance的聊天界面框架");
-        messageInfo.setType(1);
+        messageInfo.setType(Constants.CHAT_ITEM_TYPE_LEFT);
         messageInfo.setHeader("http://tupian.enterdesk.com/2014/mxy/11/2/1/12.jpg");
         messageInfos.add(messageInfo);
 
         MessageInfo messageInfo1 = new MessageInfo();
         messageInfo1.setFilepath("");
         messageInfo1.setVoiceTime(3000);
-        messageInfo1.setType(2);
-        messageInfo1.setSendState(3);
+        messageInfo1.setType(Constants.CHAT_ITEM_TYPE_RIGHT);
+        messageInfo1.setSendState(Constants.CHAT_ITEM_SEND_SUCCESS);
         messageInfo1.setHeader("http://img.dongqiudi.com/uploads/avatar/2014/10/20/8MCTb0WBFG_thumb_1413805282863.jpg");
         messageInfos.add(messageInfo1);
 
         MessageInfo messageInfo2 = new MessageInfo();
         messageInfo2.setImageUrl("http://img4.imgtn.bdimg.com/it/u=1800788429,176707229&fm=21&gp=0.jpg");
-        messageInfo2.setType(1);
+        messageInfo2.setType(Constants.CHAT_ITEM_TYPE_LEFT);
         messageInfo2.setHeader("http://tupian.enterdesk.com/2014/mxy/11/2/1/12.jpg");
         messageInfos.add(messageInfo2);
+
+        MessageInfo messageInfo3 = new MessageInfo();
+        messageInfo3.setContent("[呵呵][嘻嘻][哈哈]");
+        messageInfo3.setType(Constants.CHAT_ITEM_TYPE_RIGHT);
+        messageInfo3.setSendState(Constants.CHAT_ITEM_SEND_ERROR);
+        messageInfo3.setHeader("http://img.dongqiudi.com/uploads/avatar/2014/10/20/8MCTb0WBFG_thumb_1413805282863.jpg");
+        messageInfos.add(messageInfo3);
 
         chatAdapter.addAll(messageInfos);
     }
@@ -192,13 +202,26 @@ public class MainActivity extends AppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void MessageEventBus(final MessageInfo messageInfo) {
         messageInfo.setHeader("http://img.dongqiudi.com/uploads/avatar/2014/10/20/8MCTb0WBFG_thumb_1413805282863.jpg");
+        messageInfo.setType(Constants.CHAT_ITEM_TYPE_RIGHT);
+        messageInfo.setSendState(Constants.CHAT_ITEM_SENDING);
         messageInfos.add(messageInfo);
         chatAdapter.add(messageInfo);
         chatList.scrollToPosition(chatAdapter.getCount() - 1);
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                messageInfo.setSendState(3);
+                messageInfo.setSendState(Constants.CHAT_ITEM_SEND_SUCCESS);
                 chatAdapter.notifyDataSetChanged();
+            }
+        }, 2000);
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                MessageInfo message = new MessageInfo();
+                message.setContent("这是模拟消息回复");
+                message.setType(Constants.CHAT_ITEM_TYPE_LEFT);
+                message.setHeader("http://tupian.enterdesk.com/2014/mxy/11/2/1/12.jpg");
+                messageInfos.add(message);
+                chatAdapter.add(message);
+                chatList.scrollToPosition(chatAdapter.getCount() - 1);
             }
         }, 3000);
     }

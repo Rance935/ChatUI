@@ -11,10 +11,9 @@ import com.rance.chatui.util.Utils;
 import java.util.ArrayList;
 
 /**
- * Created by zejian
- * Time  16/1/8 下午3:19
- * Email shinezejian@163.com
- * Description:自定义表情底部指示器
+ * 作者：Rance on 2016/11/29 10:47
+ * 邮箱：rance935@163.com
+ * 自定义表情底部指示器
  */
 public class IndicatorView extends LinearLayout {
 

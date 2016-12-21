@@ -9,10 +9,8 @@ import android.widget.GridView;
 import java.util.List;
 
 /**
- * Created by zejian
- * Time  16/1/7 下午4:09
- * Email shinezejian@163.com
- * Description: EmotiomComplateFragment界面Viewpager数据适配器
+ * 作者：Rance on 2016/11/29 10:47
+ * 邮箱：rance935@163.com
  */
 public class EmotionPagerAdapter extends PagerAdapter {
 

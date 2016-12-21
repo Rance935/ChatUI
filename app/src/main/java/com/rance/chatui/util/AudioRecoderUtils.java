@@ -10,8 +10,8 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * 录音
- * Created by fan on 2016/6/23.
+ * 作者：Rance on 2016/11/29 10:47
+ * 邮箱：rance935@163.com
  */
 public class AudioRecoderUtils {
 
