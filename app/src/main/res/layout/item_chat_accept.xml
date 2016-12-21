@@ -28,7 +28,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/chat_item_header"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             android:visibility="gone"
             app:angle="6dp"
             app:arrowHeight="8dp"

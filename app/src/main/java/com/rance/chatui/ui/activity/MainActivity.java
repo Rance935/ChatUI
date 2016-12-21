@@ -1,5 +1,6 @@
 package com.rance.chatui.ui.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -17,6 +19,7 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.rance.chatui.R;
 import com.rance.chatui.adapter.ChatAdapter;
 import com.rance.chatui.adapter.CommonFragmentPagerAdapter;
+import com.rance.chatui.enity.FullImageInfo;
 import com.rance.chatui.enity.MessageInfo;
 import com.rance.chatui.ui.fragment.ChatEmotionFragment;
 import com.rance.chatui.ui.fragment.ChatFunctionFragment;
@@ -130,8 +133,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onImageClick(int position) {
-            Toast.makeText(MainActivity.this, "onImageClick", Toast.LENGTH_SHORT).show();
+        public void onImageClick(View view, int position) {
+            int location[] = new int[2];
+            view.getLocationOnScreen(location);
+            FullImageInfo fullImageInfo = new FullImageInfo();
+            fullImageInfo.setLocationX(location[0]);
+            fullImageInfo.setLocationY(location[1]);
+            fullImageInfo.setWidth(view.getWidth());
+            fullImageInfo.setHeight(view.getHeight());
+            fullImageInfo.setImageUrl(messageInfos.get(position).getImageUrl());
+            EventBus.getDefault().postSticky(fullImageInfo);
+            startActivity(new Intent(MainActivity.this, FullImageActivity.class));
+            overridePendingTransition(0, 0);
         }
 
         @Override

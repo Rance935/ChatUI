@@ -74,7 +74,7 @@ public class ChatAcceptViewHolder extends BaseViewHolder<MessageInfo> {
             chatItemContentImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListener.onImageClick(getDataPosition());
+                    onItemClickListener.onImageClick(chatItemContentImage, getDataPosition());
                 }
             });
         } else if (data.getFilepath() != null) {

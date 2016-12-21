@@ -1,6 +1,7 @@
 package com.rance.chatui.adapter;
 
 import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -49,7 +50,7 @@ public class ChatAdapter extends RecyclerArrayAdapter<MessageInfo> {
     public interface onItemClickListener {
         void onHeaderClick(int position);
 
-        void onImageClick(int position);
+        void onImageClick(View view, int position);
 
         void onVoiceClick(ImageView imageView, int position);
     }
