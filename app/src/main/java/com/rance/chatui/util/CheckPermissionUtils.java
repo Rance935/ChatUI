@@ -1,11 +1,13 @@
 package com.rance.chatui.util;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 
 /**
  * 作者：Rance on 2016/12/14 11:09
@@ -42,7 +44,23 @@ public class CheckPermissionUtils {
          * 根据开始录音判断是否有录音权限
          */
         if (audioRecord.getRecordingState() != AudioRecord.RECORDSTATE_RECORDING) {
-            context.startActivity(new Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS));
+            new AlertDialog.Builder(context)
+                    .setTitle("提示")
+                    .setMessage("经检测语音权限未开启，设置方法：三方手机管理(应用宝、360)->安全->权限管理程序->应用程序->勾选语音权限。或去设置中心找到应用设置权限")
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setPositiveButton("去设置", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            context.startActivity(new Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS));
+                        }
+                    })
+                    .show();
             return false;
         }
         audioRecord.stop();

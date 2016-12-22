@@ -55,6 +55,7 @@ public class AudioRecoderUtils {
      */
     public void startRecord(Context context) {
         if (!CheckPermissionUtils.isHasPermission(context)) {
+            audioStatusUpdateListener.onError();
             return;
         }
         // 开始录音
@@ -85,8 +86,10 @@ public class AudioRecoderUtils {
             updateMicStatus();
             Log.e("fan", "startTime" + startTime);
         } catch (IllegalStateException e) {
+            audioStatusUpdateListener.onError();
             Log.i(TAG, "call startAmr(File mRecAudioFile) failed!" + e.getMessage());
         } catch (IOException e) {
+            audioStatusUpdateListener.onError();
             Log.i(TAG, "call startAmr(File mRecAudioFile) failed!" + e.getMessage());
         }
     }
@@ -185,6 +188,11 @@ public class AudioRecoderUtils {
          * @param filePath 保存路径
          */
         public void onStop(long time, String filePath);
+
+        /**
+         * 录音失败
+         */
+        public void onError();
     }
 
 }
