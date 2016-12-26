@@ -28,17 +28,17 @@ public class CheckPermissionUtils {
     /**
      * 判断是是否有录音权限
      */
-    public static boolean isHasPermission(final Context context) {
+    public static boolean isHasPermission(final Context context){
         bufferSizeInBytes = 0;
         bufferSizeInBytes = AudioRecord.getMinBufferSize(sampleRateInHz,
                 channelConfig, audioFormat);
-        AudioRecord audioRecord = new AudioRecord(audioSource, sampleRateInHz,
+        AudioRecord audioRecord =  new AudioRecord(audioSource, sampleRateInHz,
                 channelConfig, audioFormat, bufferSizeInBytes);
         //开始录制音频
-        try {
+        try{
             // 防止某些手机崩溃，例如联想
             audioRecord.startRecording();
-        } catch (IllegalStateException e) {
+        }catch (IllegalStateException e){
             e.printStackTrace();
         }
         /**
@@ -47,8 +47,8 @@ public class CheckPermissionUtils {
         if (audioRecord.getRecordingState() != AudioRecord.RECORDSTATE_RECORDING) {
             new AlertDialog.Builder(context)
                     .setTitle("提示")
-                    .setMessage("检查录音权限未开启, 请尝试以下路径开启录音权限：三方手机管理（360、应用宝）-权限管理-应用程序-录音-允许。或直接去设置中心找到应用程序开启权限")
-                    .setNegativeButton("返回", new DialogInterface.OnClickListener() {
+                    .setMessage("经检测语音权限未开启，设置方法：三方手机管理(应用宝、360)->安全->权限管理程序->应用程序->勾选语音权限。或去设置中心找到应用设置权限")
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -57,8 +57,8 @@ public class CheckPermissionUtils {
                     .setPositiveButton("去设置", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            context.startActivity(new Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS));
                             dialog.dismiss();
+                            context.startActivity(new Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS));
                         }
                     })
                     .show();

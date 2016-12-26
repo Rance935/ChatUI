@@ -322,6 +322,12 @@ public class EmotionInputDetector {
                 messageInfo.setVoiceTime(time);
                 EventBus.getDefault().post(messageInfo);
             }
+
+            @Override
+            public void onError() {
+                mVoiceText.setVisibility(View.GONE);
+                mEditText.setVisibility(View.VISIBLE);
+            }
         });
         return this;
     }
