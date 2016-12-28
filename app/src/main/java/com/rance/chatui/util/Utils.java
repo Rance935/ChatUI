@@ -6,8 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.widget.TextView;
 
@@ -33,28 +31,14 @@ public class Utils {
     }
 
     /**
-     * @param str   文字
-     * @param color 要改变的文字颜色
-     * @param start 开始位置
-     * @param end   结束位置
-     * @return 改变部分文字颜色
-     */
-    public static SpannableStringBuilder changTextColor(String str, int color, int start, int end) {
-        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(str);
-        spannableStringBuilder.setSpan(new ForegroundColorSpan(color), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return spannableStringBuilder;
-    }
-
-    /**
      * 文本中的emojb字符处理为表情图片
      *
-     * @param emotion_map_type
      * @param context
      * @param tv
      * @param source
      * @return
      */
-    public static SpannableString getEmotionContent(int emotion_map_type, final Context context, final TextView tv, String source) {
+    public static SpannableString getEmotionContent(final Context context, final TextView tv, String source) {
         SpannableString spannableString = new SpannableString(source);
         Resources res = context.getResources();
 
@@ -68,10 +52,10 @@ public class Utils {
             // 匹配字符串的开始位置
             int start = matcherEmotion.start();
             // 利用表情名字获取到对应的图片
-            Integer imgRes = EmotionUtils.getImgByName(emotion_map_type, key);
+            Integer imgRes = EmotionUtils.EMOTION_STATIC_MAP.get(key);
             if (imgRes != null) {
                 // 压缩表情图片
-                int size = (int) tv.getTextSize() * 13 / 10;
+                int size = (int) tv.getTextSize() * 13 / 8;
                 Bitmap bitmap = BitmapFactory.decodeResource(res, imgRes);
                 Bitmap scaleBitmap = Bitmap.createScaledBitmap(bitmap, size, size, true);
 

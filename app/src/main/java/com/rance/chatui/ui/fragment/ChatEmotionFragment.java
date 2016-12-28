@@ -92,10 +92,10 @@ public class ChatEmotionFragment extends BaseFragment {
         List<GridView> emotionViews = new ArrayList<>();
         List<String> emotionNames = new ArrayList<>();
         // 遍历所有的表情的key
-        for (String emojiName : EmotionUtils.getEmojiMap(EmotionUtils.EMOTION_CLASSIC_TYPE).keySet()) {
+        for (String emojiName : EmotionUtils.EMOTION_STATIC_MAP.keySet()) {
             emotionNames.add(emojiName);
             // 每20个表情作为一组,同时添加到ViewPager对应的view集合中
-            if (emotionNames.size() == 20) {
+            if (emotionNames.size() == 23) {
                 GridView gv = createEmotionGridView(emotionNames, screenWidth, spacing, itemWidth, gvHeight);
                 emotionViews.add(gv);
                 // 添加完一组表情,重新创建一个表情名字集合
@@ -103,7 +103,7 @@ public class ChatEmotionFragment extends BaseFragment {
             }
         }
 
-        // 判断最后是否有不足20个表情的剩余情况
+        // 判断最后是否有不足23个表情的剩余情况
         if (emotionNames.size() > 0) {
             GridView gv = createEmotionGridView(emotionNames, screenWidth, spacing, itemWidth, gvHeight);
             emotionViews.add(gv);
@@ -129,7 +129,7 @@ public class ChatEmotionFragment extends BaseFragment {
         //设置点击背景透明
         gv.setSelector(android.R.color.transparent);
         //设置7列
-        gv.setNumColumns(7);
+        gv.setNumColumns(8);
         gv.setPadding(padding, padding, padding, padding);
         gv.setHorizontalSpacing(padding);
         gv.setVerticalSpacing(padding * 2);
@@ -137,10 +137,10 @@ public class ChatEmotionFragment extends BaseFragment {
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(gvWidth, gvHeight);
         gv.setLayoutParams(params);
         // 给GridView设置表情图片
-        EmotionGridViewAdapter adapter = new EmotionGridViewAdapter(getActivity(), emotionNames, itemWidth, EmotionUtils.EMOTION_CLASSIC_TYPE);
+        EmotionGridViewAdapter adapter = new EmotionGridViewAdapter(getActivity(), emotionNames, itemWidth);
         gv.setAdapter(adapter);
         //设置全局点击事件
-        gv.setOnItemClickListener(GlobalOnItemClickManagerUtils.getInstance(getActivity()).getOnItemClickListener(EmotionUtils.EMOTION_CLASSIC_TYPE));
+        gv.setOnItemClickListener(GlobalOnItemClickManagerUtils.getInstance(getActivity()).getOnItemClickListener());
         return gv;
     }
 

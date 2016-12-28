@@ -52,7 +52,7 @@
             app:bubbleColor="@color/white"
             android:orientation="horizontal">
 
-            <TextView
+            <com.rance.chatui.widget.GifTextView
                 android:id="@+id/chat_item_content_text"
                 style="@style/text_subhead_black"
                 android:padding="@dimen/content_vertical_margin"

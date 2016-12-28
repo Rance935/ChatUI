@@ -20,13 +20,11 @@ public class EmotionGridViewAdapter extends BaseAdapter {
     private Context context;
     private List<String> emotionNames;
     private int itemWidth;
-    private int emotion_map_type;
 
-    public EmotionGridViewAdapter(Context context, List<String> emotionNames, int itemWidth, int emotion_map_type) {
+    public EmotionGridViewAdapter(Context context, List<String> emotionNames, int itemWidth) {
         this.context = context;
         this.emotionNames = emotionNames;
         this.itemWidth = itemWidth;
-        this.emotion_map_type = emotion_map_type;
     }
 
     @Override
@@ -58,7 +56,7 @@ public class EmotionGridViewAdapter extends BaseAdapter {
             iv_emotion.setImageResource(R.drawable.compose_emotion_delete);
         } else {
             String emotionName = emotionNames.get(position);
-            iv_emotion.setImageResource(EmotionUtils.getImgByName(emotion_map_type, emotionName));
+            iv_emotion.setImageResource(EmotionUtils.EMOTION_STATIC_MAP.get(emotionName));
         }
 
         return iv_emotion;

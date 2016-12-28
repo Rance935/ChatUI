@@ -1,5 +1,6 @@
 package com.rance.chatui.adapter.holder;
 
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import com.rance.chatui.util.EmotionUtils;
 import com.rance.chatui.util.Utils;
 import com.rance.chatui.widget.BubbleImageView;
 import com.rance.chatui.widget.BubbleLinearLayout;
+import com.rance.chatui.widget.GifTextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -29,7 +31,7 @@ public class ChatAcceptViewHolder extends BaseViewHolder<MessageInfo> {
     @Bind(R.id.chat_item_header)
     ImageView chatItemHeader;
     @Bind(R.id.chat_item_content_text)
-    TextView chatItemContentText;
+    GifTextView chatItemContentText;
     @Bind(R.id.chat_item_content_image)
     BubbleImageView chatItemContentImage;
     @Bind(R.id.chat_item_voice)
@@ -39,11 +41,13 @@ public class ChatAcceptViewHolder extends BaseViewHolder<MessageInfo> {
     @Bind(R.id.chat_item_voice_time)
     TextView chatItemVoiceTime;
     private ChatAdapter.onItemClickListener onItemClickListener;
+    private Handler handler;
 
     public ChatAcceptViewHolder(ViewGroup parent, ChatAdapter.onItemClickListener onItemClickListener) {
         super(parent, R.layout.item_chat_accept);
         ButterKnife.bind(this, itemView);
         this.onItemClickListener = onItemClickListener;
+        handler = new Handler();
     }
 
     @Override
@@ -57,8 +61,7 @@ public class ChatAcceptViewHolder extends BaseViewHolder<MessageInfo> {
             }
         });
         if (data.getContent() != null) {
-            chatItemContentText.setText(Utils.getEmotionContent(EmotionUtils.EMOTION_CLASSIC_TYPE,
-                    getContext(), chatItemContentText, data.getContent()));
+            chatItemContentText.setSpanText(handler, data.getContent(), true);
             chatItemVoice.setVisibility(View.GONE);
             chatItemContentText.setVisibility(View.VISIBLE);
             chatItemLayoutContent.setVisibility(View.VISIBLE);

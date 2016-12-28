@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
         messageInfos.add(messageInfo2);
 
         MessageInfo messageInfo3 = new MessageInfo();
-        messageInfo3.setContent("[呵呵][嘻嘻][哈哈]");
+        messageInfo3.setContent("[微笑][色][色][色]");
         messageInfo3.setType(Constants.CHAT_ITEM_TYPE_RIGHT);
         messageInfo3.setSendState(Constants.CHAT_ITEM_SEND_ERROR);
         messageInfo3.setHeader("http://img.dongqiudi.com/uploads/avatar/2014/10/20/8MCTb0WBFG_thumb_1413805282863.jpg");

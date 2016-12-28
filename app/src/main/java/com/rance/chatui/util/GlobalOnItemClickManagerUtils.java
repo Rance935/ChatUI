@@ -35,7 +35,7 @@ public class GlobalOnItemClickManagerUtils {
         mEditText = editText;
     }
 
-    public AdapterView.OnItemClickListener getOnItemClickListener(final int emotion_map_type) {
+    public AdapterView.OnItemClickListener getOnItemClickListener() {
         return new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -59,8 +59,7 @@ public class GlobalOnItemClickManagerUtils {
                         sb.insert(curPosition, emotionName);
 
                         // 特殊文字处理,将表情等转换一下
-                        mEditText.setText(Utils.getEmotionContent(emotion_map_type,
-                                mContext, mEditText, sb.toString()));
+                        mEditText.setText(Utils.getEmotionContent(mContext, mEditText, sb.toString()));
 
                         // 将光标设置到新增完表情的右侧
                         mEditText.setSelection(curPosition + emotionName.length());
