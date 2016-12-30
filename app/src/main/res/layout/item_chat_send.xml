@@ -54,7 +54,7 @@
                 app:arrowLocation="right"
                 app:arrowPosition="10dp"
                 app:arrowWidth="8dp"
-                app:bubbleColor="@color/colorPrimary">
+                app:bubbleColor="@color/divider_line">
 
                 <com.rance.chatui.widget.GifTextView
                     android:id="@+id/chat_item_content_text"

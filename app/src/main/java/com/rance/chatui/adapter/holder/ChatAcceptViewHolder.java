@@ -43,11 +43,11 @@ public class ChatAcceptViewHolder extends BaseViewHolder<MessageInfo> {
     private ChatAdapter.onItemClickListener onItemClickListener;
     private Handler handler;
 
-    public ChatAcceptViewHolder(ViewGroup parent, ChatAdapter.onItemClickListener onItemClickListener) {
+    public ChatAcceptViewHolder(ViewGroup parent, ChatAdapter.onItemClickListener onItemClickListener, Handler handler) {
         super(parent, R.layout.item_chat_accept);
         ButterKnife.bind(this, itemView);
         this.onItemClickListener = onItemClickListener;
-        handler = new Handler();
+        this.handler = handler;
     }
 
     @Override

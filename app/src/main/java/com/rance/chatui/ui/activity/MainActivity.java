@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -119,6 +120,29 @@ public class MainActivity extends AppCompatActivity {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         chatList.setLayoutManager(layoutManager);
         chatList.setAdapter(chatAdapter);
+        chatList.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                switch (newState) {
+                    case RecyclerView.SCROLL_STATE_IDLE:
+                        chatAdapter.handler.removeCallbacksAndMessages(null);
+                        chatAdapter.notifyDataSetChanged();
+                        break;
+                    case RecyclerView.SCROLL_STATE_DRAGGING:
+                        chatAdapter.handler.removeCallbacksAndMessages(null);
+                        mDetector.hideEmotionLayout(false);
+                        mDetector.hideSoftInput();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
         chatAdapter.addItemClickListener(itemClickListener);
         LoadData();
     }

@@ -350,7 +350,7 @@ public class EmotionInputDetector {
         mEmotionLayout.setVisibility(View.VISIBLE);
     }
 
-    private void hideEmotionLayout(boolean showSoftInput) {
+    public void hideEmotionLayout(boolean showSoftInput) {
         if (mEmotionLayout.isShown()) {
             mEmotionLayout.setVisibility(View.GONE);
             if (showSoftInput) {
@@ -384,7 +384,7 @@ public class EmotionInputDetector {
         });
     }
 
-    private void hideSoftInput() {
+    public void hideSoftInput() {
         mInputManager.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
     }
 
