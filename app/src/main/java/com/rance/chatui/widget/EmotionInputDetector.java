@@ -201,16 +201,8 @@ public class EmotionInputDetector {
         voiceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isSoftInputShown()) {
-                    lockContentHeight();
-                    hideSoftInput();
-                    unlockContentHeightDelayed();
-                }
-                if (mEmotionLayout.isShown()) {
-                    lockContentHeight();
-                    hideEmotionLayout(true);
-                    unlockContentHeightDelayed();
-                }
+                hideEmotionLayout(false);
+                hideSoftInput();
                 mVoiceText.setVisibility(mVoiceText.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
                 mEditText.setVisibility(mVoiceText.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
             }

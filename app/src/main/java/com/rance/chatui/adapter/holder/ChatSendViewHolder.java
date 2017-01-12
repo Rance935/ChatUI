@@ -1,10 +1,13 @@
 package com.rance.chatui.adapter.holder;
 
 import android.os.Handler;
+import android.text.TextPaint;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -47,12 +50,14 @@ public class ChatSendViewHolder extends BaseViewHolder<MessageInfo> {
     TextView chatItemVoiceTime;
     private ChatAdapter.onItemClickListener onItemClickListener;
     private Handler handler;
+    private RelativeLayout.LayoutParams layoutParams;
 
     public ChatSendViewHolder(ViewGroup parent, ChatAdapter.onItemClickListener onItemClickListener, Handler handler) {
         super(parent, R.layout.item_chat_send);
         ButterKnife.bind(this, itemView);
         this.onItemClickListener = onItemClickListener;
         this.handler = handler;
+        layoutParams = (RelativeLayout.LayoutParams) chatItemLayoutContent.getLayoutParams();
     }
 
 
@@ -73,6 +78,17 @@ public class ChatSendViewHolder extends BaseViewHolder<MessageInfo> {
             chatItemLayoutContent.setVisibility(View.VISIBLE);
             chatItemVoiceTime.setVisibility(View.GONE);
             chatItemContentImage.setVisibility(View.GONE);
+            TextPaint paint = chatItemContentText.getPaint();
+            // 计算textview在屏幕上占多宽
+            int len = (int) paint.measureText(chatItemContentText.getText().toString().trim());
+            if (len < Utils.dp2px(getContext(), 200)){
+                layoutParams.width = len + Utils.dp2px(getContext(), 30);
+                layoutParams.height = Utils.dp2px(getContext(), 48);
+            } else {
+                layoutParams.width = LinearLayout.LayoutParams.MATCH_PARENT;
+                layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+            }
+            chatItemLayoutContent.setLayoutParams(layoutParams);
         } else if (data.getImageUrl() != null) {
             chatItemVoice.setVisibility(View.GONE);
             chatItemLayoutContent.setVisibility(View.GONE);
@@ -86,6 +102,9 @@ public class ChatSendViewHolder extends BaseViewHolder<MessageInfo> {
                     onItemClickListener.onImageClick(chatItemContentImage, getDataPosition());
                 }
             });
+            layoutParams.width = Utils.dp2px(getContext(), 120);
+            layoutParams.height = Utils.dp2px(getContext(), 48);
+            chatItemLayoutContent.setLayoutParams(layoutParams);
         } else if (data.getFilepath() != null) {
             chatItemVoice.setVisibility(View.VISIBLE);
             chatItemLayoutContent.setVisibility(View.VISIBLE);
@@ -99,6 +118,9 @@ public class ChatSendViewHolder extends BaseViewHolder<MessageInfo> {
                     onItemClickListener.onVoiceClick(chatItemVoice, getDataPosition());
                 }
             });
+            layoutParams.width = Utils.dp2px(getContext(), 120);
+            layoutParams.height = Utils.dp2px(getContext(), 48);
+            chatItemLayoutContent.setLayoutParams(layoutParams);
         }
         switch (data.getSendState()) {
             case Constants.CHAT_ITEM_SENDING:
