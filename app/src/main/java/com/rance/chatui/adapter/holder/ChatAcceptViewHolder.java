@@ -78,11 +78,10 @@ public class ChatAcceptViewHolder extends BaseViewHolder<MessageInfo> {
             int len = (int) paint.measureText(chatItemContentText.getText().toString().trim());
             if (len < Utils.dp2px(getContext(), 200)){
                 layoutParams.width = len + Utils.dp2px(getContext(), 30);
-                layoutParams.height = Utils.dp2px(getContext(), 48);
             } else {
                 layoutParams.width = LinearLayout.LayoutParams.MATCH_PARENT;
-                layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
             }
+            layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
             chatItemLayoutContent.setLayoutParams(layoutParams);
         } else if (data.getImageUrl() != null) {
             chatItemVoice.setVisibility(View.GONE);
