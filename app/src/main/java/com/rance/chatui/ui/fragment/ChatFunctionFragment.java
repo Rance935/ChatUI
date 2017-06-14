@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -151,7 +152,7 @@ public class ChatFunctionFragment extends BaseFragment {
                     try {
                         Uri uri = data.getData();
                         MessageInfo messageInfo = new MessageInfo();
-                        messageInfo.setImageUrl(uri.getPath());
+                        messageInfo.setImageUrl(getRealPathFromURI(uri));
                         EventBus.getDefault().post(messageInfo);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -189,4 +190,15 @@ public class ChatFunctionFragment extends BaseFragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
+    public String getRealPathFromURI(Uri contentUri) {
+        String res = null;
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getActivity().getContentResolver().query(contentUri, proj, null, null, null);
+        if(cursor.moveToFirst()){;
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            res = cursor.getString(column_index);
+        }
+        cursor.close();
+        return res;
+    }
 }
