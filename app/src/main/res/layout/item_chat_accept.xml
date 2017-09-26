@@ -36,36 +36,28 @@
             app:arrowPosition="15dp"
             app:arrowWidth="10dp" />
 
-        <com.rance.chatui.widget.BubbleLinearLayout
+        <LinearLayout
             android:id="@+id/chat_item_layout_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="@dimen/content_vertical_margin"
             android:layout_toRightOf="@id/chat_item_header"
             android:gravity="left|center_vertical"
-            android:minHeight="48dp"
-            android:minWidth="120dp"
-            app:angle="4dp"
-            app:arrowHeight="10dp"
-            app:arrowLocation="left"
-            app:arrowPosition="10dp"
-            app:arrowWidth="8dp"
-            app:bubbleColor="@color/white"
-            android:orientation="horizontal">
+            android:background="@mipmap/chatfrom_bg_normal">
 
             <com.rance.chatui.widget.GifTextView
                 android:id="@+id/chat_item_content_text"
                 style="@style/text_subhead_black"
-                android:padding="@dimen/content_vertical_margin"
                 android:layout_marginLeft="@dimen/content_horizontal_margin" />
 
             <ImageView
                 android:id="@+id/chat_item_voice"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="72dp"
                 android:src="@mipmap/icon_voice_left3"
                 android:visibility="gone" />
-        </com.rance.chatui.widget.BubbleLinearLayout>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/chat_item_voice_time"
